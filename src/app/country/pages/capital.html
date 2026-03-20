@@ -1,3 +1,9 @@
-<country-search placeholder="Search by capital..." (term)="setTerm($event)" />
+<country-search placeholder="Search by capital..." (term)="term.set($event)" />
 
-<country-list />
+@if (countriesResource.error()) {
+  <div class="alert alert-error mt-4">
+    <span>{{countriesResource.error()}}</span>
+  </div>
+} @else if (countriesResource.hasValue()) {
+  <country-list [countries]="countriesResource.value()!" />
+}

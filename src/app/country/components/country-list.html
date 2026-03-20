@@ -12,14 +12,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th>1</th>
-          <td>Cy Ganderton</td>
-          <td>Quality Control Specialist</td>
-          <td>Littel, Schaden and Vandervort</td>
-          <td>Canada</td>
-          <td>12/16/2020</td>
-        </tr>
+        @for (country of countries(); track country.name; let i = $index) {
+          <tr>
+            <th>{{ i + 1 }}</th>
+            <td>{{ country.flag }}</td>
+            <td><img [src]="country.flags.png" [alt]="country.flags.alt" class="w-8" /></td>
+            <td>{{ country.name }}</td>
+            <td>{{ country.capital }}</td>
+            <td><span class="badge badge-info">{{ country.population | number }}</span></td>
+          </tr>
+        }
       </tbody>
     </table>
   </div>
