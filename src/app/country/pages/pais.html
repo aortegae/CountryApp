@@ -1,6 +1,6 @@
 <country-search placeholder="Search by country name..." (term)="term.set($event)" />
-@if (paisResource.error(); as err) {
+@if (paisRxResource.error(); as err) {
   <p class="error">{{err.message}}</p>
-} @else if (paisResource.hasValue()) {
-  <country-list [countries]="paisResource.value()!" />
+} @else if (paisRxResource.hasValue()) {
+  <country-list [countries]="paisRxResource.value()!" />
 }
