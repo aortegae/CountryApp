@@ -18,7 +18,6 @@ export default class CountryPaisPageComponent {
     params: () => ({ term: this.term() }),
     stream: ({ params }) => {
       if (!params.term) return of([]);
-      console.log('using rxResource');
       return this.countryService.searchByName(params.term);
     },
   });

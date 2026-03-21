@@ -1,4 +1,8 @@
 <country-search placeholder="Search by country name..." (term)="term.set($event)" />
+@if (paisRxResource.isLoading()) {
+<span class="loading loading-dots loading-lg">Loading</span>
+  <p>Loading...</p>
+}
 @if (paisRxResource.error(); as err) {
   <p class="error">{{err.message}}</p>
 } @else if (paisRxResource.hasValue()) {

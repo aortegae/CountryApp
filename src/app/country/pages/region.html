@@ -1,1 +1,4 @@
-<country-list [countries]="[]" />
+<country-search (term)="term.set($event)" placeholder="Buscar por región" />
+@if (countriesRxResource.hasValue()) {
+  <country-list [countries]="countriesRxResource.value()" />
+}

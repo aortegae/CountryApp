@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import type { RESTCountry, Country } from '../interfaces/country.interface';
-import { Observable, map } from 'rxjs';
+import { Observable, debounceTime, delay, map } from 'rxjs';
 import { CountryMapper } from '../mappers/country.mapper';
 import { catchError } from 'rxjs';
 
@@ -16,9 +16,9 @@ export class CountryService {
   searchByCapital(term: string): Observable<Country[]> {
     term = term.toLowerCase();
     return this.http.get<RESTCountry[]>(`${API_URL}/capital/${term}`).pipe(
+      delay(500),
       map((countries) => CountryMapper.mapToCountries(countries)),
       catchError((error) => {
-        console.error('Error fetching countries by capital:', error);
         throw new Error('Failed to fetch countries by capital. Please try again later.');
       }),
     );
@@ -26,8 +26,18 @@ export class CountryService {
 
   searchByName(term: string): Observable<Country[]> {
     term = term.toLowerCase();
-    return this.http
-      .get<RESTCountry[]>(`${API_URL}/name/${term}`)
-      .pipe(map((countries) => CountryMapper.mapToCountries(countries)));
+    return this.http.get<RESTCountry[]>(`${API_URL}/name/${term}`).pipe(
+      delay(5000),
+      map((countries) => CountryMapper.mapToCountries(countries)),
+    );
+  }
+
+  searchByRegion(term: string): Observable<Country[]> {
+    term = term.toLowerCase();
+    return this.http.get<RESTCountry[]>(`${API_URL}/region/${term}`).pipe(
+      debounceTime(500),
+      delay(500),
+      map((countries) => CountryMapper.mapToCountries(countries)),
+    );
   }
 }

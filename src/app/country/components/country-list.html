@@ -9,6 +9,7 @@
           <th>Nombre</th>
           <th>Capital</th>
           <th>Población</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -20,6 +21,9 @@
             <td>{{ country.name }}</td>
             <td>{{ country.capital }}</td>
             <td><span class="badge badge-info">{{ country.population | number }}</span></td>
+            <td>
+            <a [routerLink]="['/country/detail',country.code]" class="btn btn-sm btn-primary">Detalles</a>
+            {{ country.code }}</td>
           </tr>
         }
       </tbody>

@@ -18,6 +18,10 @@ const countryRoutes: Routes = [
         path: 'pais',
         loadComponent: () => import('./pages/pais'),
       },
+      {
+        path: 'detail/:code',
+        loadComponent: () => import('./pages/country-details'),
+      },
     ],
   },
 ];

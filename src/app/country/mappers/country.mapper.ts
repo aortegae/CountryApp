@@ -3,6 +3,7 @@ import { Country, RESTCountry } from '../interfaces/country.interface';
 export class CountryMapper {
   static mapToCountry(country: RESTCountry): Country {
     return {
+      code: country.cca3,
       name: country.translations?.['spa']?.common || country.name.common,
       capital: country.capital ? country.capital[0] : 'N/A',
       region: country.region,
