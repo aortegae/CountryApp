@@ -16,6 +16,7 @@ export class CountryService {
   searchByCapital(term: string): Observable<Country[]> {
     term = term.toLowerCase();
     return this.http.get<RESTCountry[]>(`${API_URL}/capital/${term}`).pipe(
+      debounceTime(500),
       delay(500),
       map((countries) => CountryMapper.mapToCountries(countries)),
       catchError((error) => {
@@ -27,7 +28,8 @@ export class CountryService {
   searchByName(term: string): Observable<Country[]> {
     term = term.toLowerCase();
     return this.http.get<RESTCountry[]>(`${API_URL}/name/${term}`).pipe(
-      delay(5000),
+      debounceTime(500),
+      delay(500),
       map((countries) => CountryMapper.mapToCountries(countries)),
     );
   }
@@ -38,6 +40,18 @@ export class CountryService {
       debounceTime(500),
       delay(500),
       map((countries) => CountryMapper.mapToCountries(countries)),
+    );
+  }
+
+  getCountryByCode(code: string): Observable<Country> {
+    code = code.toUpperCase();
+    return this.http.get<RESTCountry[]>(`${API_URL}/alpha/${code}`).pipe(
+      debounceTime(500),
+      delay(500),
+      map((countries) => CountryMapper.mapToCountry(countries[0])),
+      catchError((error) => {
+        throw new Error('Failed to fetch country details. Please try again later.');
+      }),
     );
   }
 }
