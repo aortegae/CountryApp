@@ -1,3 +1,5 @@
+export type Region = 'Africa' | 'Americas' | 'Asia' | 'Europe' | 'Oceania' | 'Antarctic';
+
 export interface Country {
   code: string;
   name: string;

@@ -1,0 +1,9 @@
+@for (r of regions; track r) {
+  <button
+    [class]="['btn', 'btn-outline', 'mx-1', selectedContinent() === r ? 'btn-primary' : ''].join(' ')"
+    (click)="setSelectedItem(r)">{{ r }}</button>
+}
+@if(countriesRxResource.hasValue()) {
+
+  <country-list [countries]="countriesRxResource.value()"></country-list>
+}

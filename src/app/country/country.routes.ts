@@ -22,6 +22,10 @@ const countryRoutes: Routes = [
         path: 'detail/:code',
         loadComponent: () => import('./pages/country-details'),
       },
+      {
+        path: 'continent',
+        loadComponent: () => import('./pages/continent'),
+      },
     ],
   },
 ];
